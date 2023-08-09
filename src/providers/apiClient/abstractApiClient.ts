@@ -1,7 +1,9 @@
+import { AxiosPromise } from 'axios';
+import { WeatherData } from '../../store/stores/CityStore.types';
+
 export abstract class AbstractApiClient {
     abstract __extendHeaders(headers: { [key: string]: string | undefined }): void;
 
-    setAuthorizationHeader(token: string, type = 'Bearer'): void {
-        this.__extendHeaders({ Authorization: `${type} ${token}` });
-    }
+    abstract getWeatherByCityId(cityId: number): AxiosPromise<WeatherData>
+    abstract getWeatherByLatLon(lat: number, lon: number): AxiosPromise<WeatherData>
 }
