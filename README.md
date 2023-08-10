@@ -1,4 +1,4 @@
-# Тестовое приложение с прогнозом погоды на React, TS, MobX
+# Приложение для получения прогноза погоды разных городов на React, TS, MobX
 
 # Getting Started with Create React App
 
