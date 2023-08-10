@@ -47,6 +47,7 @@
   },
   "devDependencies": {
     "@types/sortablejs": "^1.15.1",
-    "prettier": "^2.6.2"
+    "prettier": "^2.6.2",
+    "sass": "^1.65.1"
   }
 }

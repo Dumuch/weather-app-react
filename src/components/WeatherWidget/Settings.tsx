@@ -13,14 +13,14 @@ interface Props {
 const SortableItem: FC<Props> = ({ city, deleteCity }) => {
     const onClickDeleteCity = () => deleteCity(city.id);
     return (
-        <div>
-            <div className='city-item__wrapper-burger-button'>
-                <div className='city-item__burger-button'></div>
+        <div className='settings-city-item'>
+            <div className='settings-city-item__wrapper-burger-button'>
+                <div className='settings-city-item__burger-button'></div>
             </div>
-            <div className='city-item__name'>
+            <div className='settings-city-item__name'>
                 {city.name}, {city.weatherData?.sys.country}
             </div>
-            <button className='city-item__delete-button' onClick={onClickDeleteCity}>delete</button>
+            <button className='settings-city-item__delete-button' onClick={onClickDeleteCity}>delete</button>
         </div>
     );
 };
@@ -70,17 +70,15 @@ const WeatherWidgetSettings = observer(() => {
     return (
         <div className='settings'>
             <div className='settings-header'>Settings</div>
-            <div className='settings__city-list'>
 
-                <ReactSortable list={CityStore.cityList.list} setList={onSortEnd}>
-                    {CityStore.cityList.list.map((item) => <SortableItem key={item.id} city={item}
-                                                                         deleteCity={deleteCity} />)}
-                </ReactSortable>
-            </div>
+            <ReactSortable handle={'.settings-city-item__wrapper-burger-button'} animation={150} className={'settings-city-list'} list={CityStore.cityList.list} setList={onSortEnd}>
+                {CityStore.cityList.list.map((item) => <SortableItem key={item.id} city={item}
+                                                                     deleteCity={deleteCity} />)}
+            </ReactSortable>
 
             <div className='settings__add-city'>
                 <div className='add-city__header'>
-                    <span className='add-city__title'>Add Location:</span>
+                    <span className='add-city__title'>Add City:</span>
                     {!currentCity && !CityStore.cityList.isLoading && cityNameInput.length ? (
                         <span className='add-city__error-message'>Not found</span>
                     ) : null}

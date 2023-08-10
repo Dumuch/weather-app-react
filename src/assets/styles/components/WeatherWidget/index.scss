@@ -1,0 +1,74 @@
+@import "Settings";
+@import "CityList";
+@import "CityItem";
+
+.wrapper-weather-widget {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+
+  font-weight: normal;
+}
+
+.weather-widget {
+  margin: 50px auto;
+  position: relative;
+  width: 300px;
+  max-width: 100%;
+}
+
+.settings-toggle {
+  position: absolute;
+  top: 0;
+  right: 6px;
+  font-size: 0;
+  border: 0;
+  height: 20px;
+  width: 30px;
+  padding: 0;
+  background-color: transparent;
+  z-index: 2;
+  cursor: pointer;
+
+}
+
+.settings-toggle__burger,
+.settings-toggle__burger::before,
+.settings-toggle__burger::after {
+  display: block;
+  background-color: grey;
+  position: absolute;
+  height: 4px;
+  width: 30px;
+  transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+  border-radius: 2px;
+  cursor: pointer;
+
+}
+
+.settings-toggle__burger::before {
+  content: '';
+  margin-top: -8px;
+}
+
+.settings-toggle__burger::after {
+  content: '';
+  margin-top: 8px;
+}
+
+.settings-toggle_open .settings-toggle__burger::before {
+  margin-top: 0;
+  transform: rotate(405deg);
+}
+
+.settings-toggle_open .settings-toggle__burger {
+  background: rgba(255, 255, 255, 0);
+}
+
+.settings-toggle_open .settings-toggle__burger::after {
+  margin-top: 0px;
+  transform: rotate(-405deg);
+}
+
+
+

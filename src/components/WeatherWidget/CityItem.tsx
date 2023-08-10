@@ -8,7 +8,7 @@ interface Props {
 }
 
 const weatherDescriptions = (weathers: WeatherDescription[]) => {
-    return weathers.map(weather => capitalized(weather.description));
+    return weathers.map(weather => capitalized(weather.description) + '.');
 };
 
 const CityItem: FC<Props> = memo(observer(({ city }) => {
@@ -27,7 +27,7 @@ const CityItem: FC<Props> = memo(observer(({ city }) => {
                             className='temperature-number'>{convertTempKelvinToCelsius(city.weatherData?.main.temp)}°C</span>
                     </div>
                     <div className='city-item__feel-like'>
-                        Feels like {convertTempKelvinToCelsius(city.weatherData?.main.feels_like)} °C.
+                        Feels like {convertTempKelvinToCelsius(city.weatherData?.main.feels_like)}°C. {' '}
                         {weatherDescriptions(city.weatherData.weather)}
                     </div>
 

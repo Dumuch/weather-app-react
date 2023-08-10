@@ -1,13 +1,13 @@
 import React from 'react';
 import WeatherWidget from './components/WeatherWidget';
-import './App.css';
+import './assets/styles/base.scss';
 
 function App() {
-  return (
-    <div className="App">
-      <WeatherWidget/>
-    </div>
-  );
+    return (
+        <div className='App'>
+            <WeatherWidget />
+        </div>
+    );
 }
 
 export default App;
