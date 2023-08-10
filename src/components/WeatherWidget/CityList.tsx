@@ -9,7 +9,6 @@ interface Props {
 
 const WeatherWidgetCityList: FC<Props> = observer(({isOpen}) => {
     const { CityStore } = useStores();
-
     return (
         <div className='city-list-container' style={{display: isOpen ? 'block' : 'none'}}>
             <ul className='city-list'>

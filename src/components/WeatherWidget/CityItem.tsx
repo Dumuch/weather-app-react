@@ -12,7 +12,6 @@ const weatherDescriptions = (weathers: WeatherDescription[]) => {
 };
 
 const CityItem: FC<Props> = memo(observer(({ city }) => {
-
     return (
         <li className='city-item'>
             <div className='city-item__header'>

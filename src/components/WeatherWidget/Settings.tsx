@@ -1,4 +1,4 @@
-import { FC, FormEvent, useRef, useState } from 'react';
+import { FC, FormEvent, memo, useCallback, useRef, useState } from 'react';
 import { useStores } from '../../store';
 import { City, WeatherData } from '../../store/stores/CityStore.types';
 import { ReactSortable } from 'react-sortablejs';
@@ -10,7 +10,7 @@ interface Props {
     deleteCity: (cityId: number) => void;
 }
 
-const SortableItem: FC<Props> = ({ city, deleteCity }) => {
+const SortableItem: FC<Props> = memo(({ city, deleteCity }) => {
     const onClickDeleteCity = () => deleteCity(city.id);
     return (
         <div className='settings-city-item'>
@@ -23,7 +23,7 @@ const SortableItem: FC<Props> = ({ city, deleteCity }) => {
             <button className='settings-city-item__delete-button' onClick={onClickDeleteCity}>delete</button>
         </div>
     );
-};
+});
 
 const WeatherWidgetSettings = observer(() => {
     const { CityStore } = useStores();
@@ -31,9 +31,12 @@ const WeatherWidgetSettings = observer(() => {
     const [currentCity, setCurrentCity] = useState<WeatherData | null>(null);
     const [cityNameInput, setCityNameInput] = useState('');
 
-    const deleteCity = (cityId: number) => {
-        CityStore.deleteCity(cityId);
-    };
+    const deleteCity = useCallback(
+        (cityId: number) => {
+            CityStore.deleteCity(cityId);
+        },
+        []
+    );
 
     const addCity = async () => {
         if (currentCity) {
@@ -71,10 +74,17 @@ const WeatherWidgetSettings = observer(() => {
         <div className='settings'>
             <div className='settings-header'>Settings</div>
 
-            <ReactSortable handle={'.settings-city-item__wrapper-burger-button'} animation={150} className={'settings-city-list'} list={CityStore.cityList.list} setList={onSortEnd}>
-                {CityStore.cityList.list.map((item) => <SortableItem key={item.id} city={item}
-                                                                     deleteCity={deleteCity} />)}
-            </ReactSortable>
+            {CityStore.cityList.list.length > 0 &&
+                <ReactSortable
+                    handle={'.settings-city-item__wrapper-burger-button'}
+                    animation={150}
+                    className={'settings-city-list'}
+                    list={CityStore.cityList.list}
+                    setList={onSortEnd}>
+                    {CityStore.cityList.list.map((item) => <SortableItem key={item.id} city={item}
+                                                                         deleteCity={deleteCity} />)}
+                </ReactSortable>
+            }
 
             <div className='settings__add-city'>
                 <div className='add-city__header'>
