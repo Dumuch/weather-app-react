@@ -1,38 +1,292 @@
 .App {
-  text-align: center;
+    text-align: center;
 }
 
 .App-logo {
-  height: 40vmin;
-  pointer-events: none;
+    height: 40vmin;
+    pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.wrapper-weather-widget {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+
+    font-weight: normal;
+}
+
+.weather-widget {
+    margin: 50px auto;
+    position: relative;
+    width: 300px;
+    max-width: 100%;
+}
+
+.settings-toggle {
+    position: absolute;
+    top: 0;
+    right: 6px;
+    font-size: 0;
+    border: 0;
+    height: 20px;
+    width: 30px;
+    padding: 0;
+    background-color: transparent;
+    z-index: 2;
+    cursor: pointer;
+
+}
+
+.settings-toggle__burger,
+.settings-toggle__burger::before,
+.settings-toggle__burger::after {
+    display: block;
+    background-color: grey;
+    position: absolute;
+    height: 4px;
+    width: 30px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 2px;
+    cursor: pointer;
+
+}
+
+.settings-toggle__burger::before {
+    content: '';
+    margin-top: -8px;
+}
+
+.settings-toggle__burger::after {
+    content: '';
+    margin-top: 8px;
+}
+
+.settings-toggle_open .settings-toggle__burger::before {
+    margin-top: 0;
+    transform: rotate(405deg);
+}
+
+.settings-toggle_open .settings-toggle__burger {
+    background: rgba(255, 255, 255, 0);
+}
+
+.settings-toggle_open .settings-toggle__burger::after {
+    margin-top: 0px;
+    transform: rotate(-405deg);
+}
+
+.settings {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}
+
+.settings-header {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.city-list {
+    margin-bottom: 1rem;
+}
+
+.city-item {
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0.25rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.city-item__wrapper-burger-button {
+    width: 15px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.city-item__burger-button {
+    top: 9px
+}
+
+.city-item__burger-button,
+.city-item__burger-button::before,
+.city-item__burger-button::after {
+    display: block;
+    background-color: black;
+    position: absolute;
+    height: 2px;
+    width: 15px;
+    transition: transform 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 1px;
+}
+
+.city-item__burger-button::before {
+    content: '';
+    margin-top: -4px;
+}
+
+.city-item__burger-button::after {
+    content: '';
+    margin-top: 4px;
+}
+
+.city-item__name {
+    margin-left: 25px;
+}
+
+.city-item__delete-button {
+    width: 20px;
+    height: 20px;
+    margin: 0 0 0 auto;
+    padding: 0;
+    background-color: transparent;
+    background-image: url("/src/assets/icons/delete.svg");
+    background-size: contain;
+    border: none;
+    font-size: 0;
+    cursor: pointer;
+
+}
+
+.settings__add-city {
+    display: flex;
+    flex-direction: column;
+}
+
+.add-city__header {
+    display: flex;
+}
+
+.add-city__title {
+    font-weight: bold;
+    font-size: 0.75rem;
+}
+
+.add-city__error-message {
+    margin-left: 6px;
+    font-size: 0.75rem;
+}
+
+.add-city__body {
+    display: flex;
+}
+
+.add-city__input {
+    flex-grow: 1;
+}
+
+.add-city__button {
+    width: 20px;
+    height: 20px;
+    margin: 0 0 0 1rem;
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+    background-image: url("/src/assets/icons/arrow_enter.svg");
+    background-size: contain;
+    font-size: 0;
+    cursor: pointer;
+}
+
+.add-city__button:disabled {
+    opacity: 0.5;
+}
+
+
+.city-list {
+    display: flex;
+    list-style: none;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+}
+
+.city-item {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.city-item:first-child {
+    margin-top: 0;
+}
+
+.city-item:last-child {
+    margin-bottom: 0;
+}
+
+.city-item__header {
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.city-item__temperature {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.temperature-number {
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.city-item__feel-like {
+    margin-bottom: 0.75rem;
+}
+
+.city-item__wind {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.wind-image {
+    margin-right: 0.5rem;
+}
+
+.city-item__humidity {
+    margin-bottom: 0.75rem;
+}
+
+.city-item__visibility {
+    margin-bottom: 0.75rem;
 }

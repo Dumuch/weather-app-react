@@ -89,4 +89,27 @@ export class CityStore {
     updateStorage() {
         LocalStorage.setStorage(CITY_LIST_KEY, this.cityList.list);
     }
+
+    async findCityByCityName(cityName: string) {
+        try {
+            const { data } = await api.getWeatherByCityName(cityName )
+            return data;
+        } catch (err) {
+            throw Error()
+        }
+    }
+
+    deleteCity(id: number): void {
+        runInAction(() => {
+            this.cityList.list = this.cityList.list.filter(city => city.id !== id)
+        })
+        this.updateStorage()
+    }
+
+    newOrder(array: City[]): void {
+        runInAction(() => {
+            this.cityList.list = array
+        })
+        this.updateStorage()
+    }
 }

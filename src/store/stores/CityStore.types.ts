@@ -19,19 +19,19 @@ export interface CityList {
     isFetch: boolean;
 }
 
+export interface WeatherDescription {
+    'id': number;
+    'main': string;
+    'description': string;
+    'icon': string;
+}
+
 export interface WeatherData {
     'coord': {
         'lon': number;
         'lat': number;
     },
-    'weather': [
-        {
-            'id': number;
-            'main': string;
-            'description': string;
-            'icon': string;
-        }
-    ],
+    'weather': WeatherDescription[],
     'base': string;
     'main': {
         'temp': number;

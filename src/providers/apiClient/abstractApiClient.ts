@@ -6,4 +6,5 @@ export abstract class AbstractApiClient {
 
     abstract getWeatherByCityId(cityId: number): AxiosPromise<WeatherData>
     abstract getWeatherByLatLon(lat: number, lon: number): AxiosPromise<WeatherData>
+    abstract getWeatherByCityName(cityName: string): AxiosPromise<WeatherData>
 }
