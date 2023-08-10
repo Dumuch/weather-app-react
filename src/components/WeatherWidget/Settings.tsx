@@ -1,4 +1,4 @@
-import { FC, FormEvent, memo, useCallback, useRef, useState } from 'react';
+import { FC, FormEvent, FormEventHandler, memo, useCallback, useRef, useState } from 'react';
 import { useStores } from '../../store';
 import { City, WeatherData } from '../../store/stores/CityStore.types';
 import { ReactSortable } from 'react-sortablejs';
@@ -38,7 +38,8 @@ const WeatherWidgetSettings = observer(() => {
         []
     );
 
-    const addCity = async () => {
+    const addCity = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
         if (currentCity) {
             setCityNameInput('');
             await CityStore.addCity({
@@ -94,12 +95,15 @@ const WeatherWidgetSettings = observer(() => {
                     ) : null}
                 </div>
                 <div className='add-city__body'>
-                    <input className='add-city__input' value={cityNameInput} onChange={onChangeInput} />
-                    <button
-                        className='add-city__button'
-                        disabled={!currentCity}
-                        onClick={addCity}>Add
-                    </button>
+                    <form onSubmit={addCity}>
+                        <input className='add-city__input' value={cityNameInput} onChange={onChangeInput} />
+                        <button
+                            className='add-city__button'
+                            disabled={!currentCity}
+                            type='submit'
+                        >Add
+                        </button>
+                    </form>
                 </div>
 
             </div>
